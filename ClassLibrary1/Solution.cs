@@ -15,7 +15,7 @@ namespace ClassLibrary1
             Length = length;
         }
 
-        public int solutionMethod(string S)//Symmetry finding method.
+        public int solutionMethod(string S)//Symmetry finding method. 
         {
             char[] characterArray = new char[Length];
             char[] characterArrayReversed = new char[Length];
