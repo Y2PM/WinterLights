@@ -15,6 +15,17 @@ namespace ClassLibrary1
             Length = length;
         }
 
+        private static List<char[]> elementsRangeSelector(char[] inputArray, int range)//This method should take a number representing a number of elements and an array, then return indexes for all elements that span the given range.
+        {
+            List<char[]> resultsList = new List<char[]>();
+            char[] aResult =new char[];
+
+            Array.Copy(inputArray,,)
+
+
+            return resultsList;
+        }
+
         //Even check symmetry method:
         private static bool EvenSymmetryCheck(char[] characterArray)//For even number of elements only.
         {
@@ -76,11 +87,16 @@ namespace ClassLibrary1
                     }
                 }//done
 
-
-                if (EvenSymmetryCheck(characterArray))//Give this a different portion of the array starting from longest going to smallest.
+                for (int i = evens.Length; i == 0; i--)
                 {
-                    numberOfWays++;
+                    //Use elementsRangeSelector method around here.
+                    if (EvenSymmetryCheck(characterArray))//Give this a different portion of the array starting from longest going to smallest.
+                    {
+                        numberOfWays++;
+                    }
+
                 }
+
 
 
 
