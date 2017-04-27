@@ -16,8 +16,9 @@ namespace ClassLibrary1
         }
 
         //Even check symmetry method:
-        private static bool SymmetryCheck(char[] characterArray, int Length)//For even number of elements only.
+        private static bool EvenSymmetryCheck(char[] characterArray)//For even number of elements only.
         {
+            int Length = characterArray.Length;
             if (characterArray.Length % 2 != 0)//if not even number of elements.
             {
                 return false;
@@ -26,7 +27,7 @@ namespace ClassLibrary1
             int EndIndex = Length;
             for (int i = 0; i < Length / 2; i++)
             {
-                if (i!=EndIndex)
+                if (characterArray[i] != characterArray[EndIndex])
                 {
                     return false;
                 }
@@ -51,26 +52,44 @@ namespace ClassLibrary1
 
             if (characterArray.Length < 2)
             {
-                return numberOfWays;
+                return 1;
             }
 
 
 
-            //If even number of elements:
+            //If even number of elements (and Length > 1):
             if (Length % 2 == 0)
             {
+                int j1 = 0;
+                int[] evens = new int[Length / 2];
+                for (int j = 0; j < Length; j++)//Get even numbers between length and 0.
+                {
+                    if (j % 2 == 0)//Is this a problem with 0?... Nope, 0 is even.
+                    {
+                        evens[j1] = j;
+                        j1++;
+                    }
+                    //Add two to every element in the array:
+                    for (int i = 0; i < evens.Length; i++)
+                    {
+                        evens[i] = evens[i] + 2;
+                    }
+                }//done
 
 
-                if (SymmetryCheck(characterArray, Length))
+                if (EvenSymmetryCheck(characterArray))//Give this a different portion of the array starting from longest going to smallest.
                 {
                     numberOfWays++;
-                }                
+                }
+
+
+
             }
 
             //If odd number of elements:
             if (Length % 2 == 1)
             {
-         
+
             }
 
             return numberOfWays % 1000000007; //Here should be number of segments victor can buy modulo 1000000007.
