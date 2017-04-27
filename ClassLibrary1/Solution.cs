@@ -18,10 +18,13 @@ namespace ClassLibrary1
         private static List<char[]> elementsRangeSelector(char[] inputArray, int range)//This method should take a number representing a number of elements and an array, then return indexes for all elements that span the given range.
         {
             List<char[]> resultsList = new List<char[]>();
-            char[] aResult =new char[];
+            char[] aResult = new char[range];
 
-            Array.Copy(inputArray,,)
-
+            for (int i = 0; i < inputArray.Length - range; i++)
+            {
+                Array.Copy(inputArray, i, aResult, 0, range);
+                resultsList.Add(aResult);
+            }
 
             return resultsList;
         }
@@ -90,6 +93,8 @@ namespace ClassLibrary1
                 for (int i = evens.Length; i == 0; i--)
                 {
                     //Use elementsRangeSelector method around here.
+                    List<char[]> elements = elementsRangeSelector(characterArray, i);
+
                     if (EvenSymmetryCheck(characterArray))//Give this a different portion of the array starting from longest going to smallest.
                     {
                         numberOfWays++;
