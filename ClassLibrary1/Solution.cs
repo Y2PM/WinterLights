@@ -15,6 +15,14 @@ namespace ClassLibrary1
             Length = length;
         }
 
+        private static List<char[]> digitScramblerMethod(List<char[]> elements)//Scramble the elements and return results.
+        {
+            List<char[]> scrambled = new List<char[]>();
+            //Scramble here, add to list, return.
+
+            return scrambled;
+        }
+
         private static List<char[]> elementsRangeSelector(char[] inputArray, int range)//This method should take a number representing a number of elements and an array, then return indexes for all elements that span the given range.
         {
             List<char[]> resultsList = new List<char[]>();
@@ -31,7 +39,7 @@ namespace ClassLibrary1
 
         //Even check symmetry method:
         private static bool EvenSymmetryCheck(char[] characterArray)//For even number of elements only.
-        {
+        {//*****************************Make good for odds too***************************************
             int Length = characterArray.Length;
             if (characterArray.Length % 2 != 0)//if not even number of elements.
             {
@@ -56,7 +64,8 @@ namespace ClassLibrary1
             char[] characterArray = new char[Length];
             char[] characterArrayReversed = new char[Length];// probably not required.
             characterArray = S.ToCharArray();
-            int numberOfWays = Length;
+            int effectiveLength = characterArray.Length;
+            int numberOfWays = effectiveLength;
 
             //Create a reversed version:
             characterArrayReversed = characterArray.Reverse().ToArray();
@@ -65,19 +74,19 @@ namespace ClassLibrary1
             //characterArrayReversed = characterArray;
             //Array.Reverse(characterArray);
 
-            if (characterArray.Length < 2)
+            if (effectiveLength < 2)
             {
                 return 1;
             }
 
 
 
-            //If even number of elements (and Length > 1):
-            if (Length % 2 == 0)
+            //If even number of elements (and Length > 1):*****************************Make good for odds too***************************************
+            if (effectiveLength % 2 == 0)
             {
                 int j1 = 0;
-                int[] evens = new int[Length / 2];
-                for (int j = 0; j < Length; j++)//Get even numbers between length and 0.
+                int[] evens = new int[effectiveLength / 2];
+                for (int j = 0; j < effectiveLength; j++)//Get even numbers between length and 0.
                 {
                     if (j % 2 == 0)//Is this a problem with 0?... Nope, 0 is even.
                     {
@@ -108,18 +117,10 @@ namespace ClassLibrary1
                         }
                     }
                 }
-
-
-
-
-
-
-
-
             }
 
-            //If odd number of elements:
-            if (Length % 2 == 1)
+            //If odd number of elements:*************************do odd things
+            if (effectiveLength % 2 == 1)
             {
 
             }
