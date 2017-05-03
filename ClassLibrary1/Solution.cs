@@ -39,7 +39,7 @@ namespace ClassLibrary1
 
         //Even check symmetry method:
         private static bool EvenSymmetryCheck(char[] characterArray)//For even number of elements only.
-        {//*****************************Make good for odds too***************************************
+        {//*****************************Make good for odds too*************************************** 
             int Length = characterArray.Length;
             if (characterArray.Length % 2 != 0)//if not even number of elements.
             {
