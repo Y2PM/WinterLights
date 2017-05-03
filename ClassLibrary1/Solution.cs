@@ -18,10 +18,10 @@ namespace ClassLibrary1
         private static List<char[]> elementsRangeSelector(char[] inputArray, int range)//This method should take a number representing a number of elements and an array, then return indexes for all elements that span the given range.
         {
             List<char[]> resultsList = new List<char[]>();
-            char[] aResult = new char[range];
 
-            for (int i = 0; i < inputArray.Length - range; i++)
+            for (int i = 0; i < inputArray.Length - range + 1; i++)
             {
+                char[] aResult = new char[range];
                 Array.Copy(inputArray, i, aResult, 0, range);
                 resultsList.Add(aResult);
             }
@@ -38,7 +38,7 @@ namespace ClassLibrary1
                 return false;
             }
 
-            int EndIndex = Length;
+            int EndIndex = Length - 1;
             for (int i = 0; i < Length / 2; i++)
             {
                 if (characterArray[i] != characterArray[EndIndex])
@@ -54,15 +54,16 @@ namespace ClassLibrary1
         public int solutionMethod(string S)//Symmetry finding method.
         {
             char[] characterArray = new char[Length];
-            char[] characterArrayReversed = new char[Length];
+            char[] characterArrayReversed = new char[Length];// probably not required.
             characterArray = S.ToCharArray();
             int numberOfWays = Length;
 
             //Create a reversed version:
-            Array.Reverse(characterArray);
-            characterArrayReversed = characterArray;
-            Array.Reverse(characterArray);
-            //
+            characterArrayReversed = characterArray.Reverse().ToArray();
+
+            //Array.Reverse(characterArray);//stack and heap problem was here.
+            //characterArrayReversed = characterArray;
+            //Array.Reverse(characterArray);
 
             if (characterArray.Length < 2)
             {
@@ -83,24 +84,34 @@ namespace ClassLibrary1
                         evens[j1] = j;
                         j1++;
                     }
-                    //Add two to every element in the array:
-                    for (int i = 0; i < evens.Length; i++)
-                    {
-                        evens[i] = evens[i] + 2;
-                    }
-                }//done
-
-                for (int i = evens.Length; i == 0; i--)
-                {
-                    //Use elementsRangeSelector method around here.
-                    List<char[]> elements = elementsRangeSelector(characterArray, i);
-
-                    if (EvenSymmetryCheck(characterArray))//Give this a different portion of the array starting from longest going to smallest.
-                    {
-                        numberOfWays++;
-                    }
 
                 }
+                //Add two to every element in the array to get rid of 0:
+                for (int i = 0; i < evens.Length; i++)
+                {
+                    evens[i] = evens[i] + 2;
+                }
+
+
+                foreach (var item1 in evens)
+                {
+                    //Use elementsRangeSelector method around here.
+                    List<char[]> elements = elementsRangeSelector(characterArray, item1);
+
+                    //Around here I need to make and use a digit scrambler method on the results in elements to put in the loop.
+
+                    foreach (var item in elements)
+                    {
+                        if (EvenSymmetryCheck(item))//Give this a different portion of the array starting from longest going to smallest.
+                        {
+                            numberOfWays++;
+                        }
+                    }
+                }
+
+
+
+
 
 
 
@@ -113,7 +124,7 @@ namespace ClassLibrary1
 
             }
 
-            return numberOfWays % 1000000007; //Here should be number of segments victor can buy modulo 1000000007.
+            return numberOfWays; //Here should be number of segments victor can buy modulo (%) 1000000007.
         }
 
 
