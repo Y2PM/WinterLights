@@ -15,7 +15,7 @@ namespace ClassLibrary1
             Length = length;
         }
 
-        private static List<char[]> digitScramblerMethod(List<char[]> elements)//Scramble the elements and return results.
+        private static List<char[]> ScrambleNumberIsItSymmetricMethod(List<char[]> elements)//Scramble the elements and return results.
         {
             List<char[]> scrambled = new List<char[]>();
             //Scramble here, add to list, return.
@@ -38,22 +38,44 @@ namespace ClassLibrary1
         }
 
         //Even check symmetry method:
-        private static bool EvenSymmetryCheck(char[] characterArray)//For even number of elements only.
-        {//*****************************Make good for odds too*************************************** 
+        private static bool EvenSymmetryCheck(char[] characterArray)
+        {//made good for odds
             int Length = characterArray.Length;
-            if (characterArray.Length % 2 != 0)//if not even number of elements.
+            int EndIndex = Length - 1;
+
+
+            if (characterArray.Length % 2 != 0)//if odd number of elements.
             {
-                return false;
+                decimal two = 2;
+                decimal middleIndex = Math.Floor(Length / two);
+                int middleIndexInt = Decimal.ToInt32(middleIndex);
+                char[] characterArrayToCheckOddSymmetry = new char[EndIndex];
+
+                Array.Copy(characterArray, 0, characterArrayToCheckOddSymmetry, 0, middleIndexInt);//Pull out middle number and make new even array.
+                Array.Copy(characterArray, middleIndexInt, characterArrayToCheckOddSymmetry, middleIndexInt, middleIndexInt);
+
+                //Check Symmetry of odd reconstructed to be even array.
+                for (int i = 0; i < EndIndex / 2; i++)//EndIndex is := length in the odd case.
+                {
+                    if (characterArrayToCheckOddSymmetry[i] != characterArrayToCheckOddSymmetry[EndIndex - 1])
+                    {
+                        return false;
+                    }
+                    EndIndex--;
+                }
+                //
             }
 
-            int EndIndex = Length - 1;
-            for (int i = 0; i < Length / 2; i++)
+            if (characterArray.Length % 2 == 0)//If even check symmetry.
             {
-                if (characterArray[i] != characterArray[EndIndex])
+                for (int i = 0; i < Length / 2; i++)
                 {
-                    return false;
+                    if (characterArray[i] != characterArray[EndIndex])
+                    {
+                        return false;
+                    }
+                    EndIndex--;
                 }
-                EndIndex--;
             }
 
             return true;
