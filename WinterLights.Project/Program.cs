@@ -11,9 +11,9 @@ namespace WinterLights.Project
     {
         static void Main(string[] args)
         {
-            string S = "02002";
+            string S = "01010";
             int answer;
-            Solution solutionObject = new Solution(5);//should be 200000
+            Solution solutionObject = new Solution(200000);//should be 200000
 
             answer = solutionObject.solutionMethod(S);
             Console.WriteLine(answer);

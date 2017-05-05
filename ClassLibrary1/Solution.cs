@@ -83,7 +83,7 @@ namespace ClassLibrary1
                 }
             }
 
-            return true;
+            return true;//ckjuhgcukerhyg
         }
 
         public int solutionMethod(string S)//Symmetry finding method.
@@ -190,11 +190,7 @@ namespace ClassLibrary1
             }
             //}
 
-            //If odd number of elements:*************************do odd things
-            if (effectiveLength % 2 == 1)
-            {
 
-            }
 
             return numberOfWays; //Here should be number of segments victor can buy modulo (%) 1000000007.
         }
