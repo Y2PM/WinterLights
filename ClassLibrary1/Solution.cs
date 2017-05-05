@@ -26,6 +26,11 @@ namespace ClassLibrary1
         private static List<char[]> elementsRangeSelector(char[] inputArray, int range)//This method should take a number representing a number of elements and an array, then return indexes for all elements that span the given range.
         {
             List<char[]> resultsList = new List<char[]>();
+            if (range == 1)
+            {
+                return resultsList;
+            }
+
 
             for (int i = 0; i < inputArray.Length - range + 1; i++)
             {
@@ -52,7 +57,7 @@ namespace ClassLibrary1
                 char[] characterArrayToCheckOddSymmetry = new char[EndIndex];
 
                 Array.Copy(characterArray, 0, characterArrayToCheckOddSymmetry, 0, middleIndexInt);//Pull out middle number and make new even array.
-                Array.Copy(characterArray, middleIndexInt, characterArrayToCheckOddSymmetry, middleIndexInt, middleIndexInt);
+                Array.Copy(characterArray, middleIndexInt + 1, characterArrayToCheckOddSymmetry, middleIndexInt, middleIndexInt);
 
                 //Check Symmetry of odd reconstructed to be even array.
                 for (int i = 0; i < EndIndex / 2; i++)//EndIndex is := length in the odd case.
@@ -104,42 +109,86 @@ namespace ClassLibrary1
 
 
             //If even number of elements (and Length > 1):*****************************Make good for odds too***************************************
-            if (effectiveLength % 2 == 0)
+            //if (effectiveLength % 2 == 0)//need to delete this condition.******************
+            //{
+
+            decimal two = 2;
+            int j1 = 0;
+            decimal arrayLengthOdds = Math.Ceiling(effectiveLength / two);
+            int arrayLengthOddsDec = Decimal.ToInt32(arrayLengthOdds);
+
+            int[] odds = new int[arrayLengthOddsDec];
+            for (int j = 1; j < effectiveLength + 1; j++)//Get odd numbers between length and 0.
             {
-                int j1 = 0;
-                int[] evens = new int[effectiveLength / 2];
-                for (int j = 0; j < effectiveLength; j++)//Get even numbers between length and 0.
+                if (j % 2 == 1)//Is this a problem with 0?... Nope, 0 is even.
                 {
-                    if (j % 2 == 0)//Is this a problem with 0?... Nope, 0 is even.
-                    {
-                        evens[j1] = j;
-                        j1++;
-                    }
-
-                }
-                //Add two to every element in the array to get rid of 0:
-                for (int i = 0; i < evens.Length; i++)
-                {
-                    evens[i] = evens[i] + 2;
+                    odds[j1] = j;
+                    j1++;
                 }
 
+            }
 
-                foreach (var item1 in evens)
+            decimal arrayLengthEvensDec = 0;
+            if (effectiveLength % 2 == 1)//if effectiveLength Length is odd.
+            {
+                arrayLengthEvensDec = arrayLengthOddsDec - 1;
+            }
+            if (effectiveLength % 2 == 0)//if effectiveLength Length is even.
+            {
+                arrayLengthEvensDec = arrayLengthOddsDec;
+            }
+            int arrayLengthEvens = Decimal.ToInt32(arrayLengthEvensDec);
+
+            j1 = 0;
+            int[] evens = new int[arrayLengthEvens];
+            for (int j = 0; j < arrayLengthEvens + 1; j++)//Get even numbers between length and 0.
+            {
+                if (j % 2 == 0)//Is this a problem with 0?... Nope, 0 is even.
                 {
-                    //Use elementsRangeSelector method around here.
-                    List<char[]> elements = elementsRangeSelector(characterArray, item1);
+                    evens[j1] = j;
+                    j1++;
+                }
 
-                    //Around here I need to make and use a digit scrambler method on the results in elements to put in the loop.
+            }
+            //Add two to every element in the array to get rid of 0:
+            for (int i = 0; i < evens.Length; i++)
+            {
+                evens[i] = evens[i] + 2;
+            }
 
-                    foreach (var item in elements)
+
+            foreach (var item1 in evens)
+            {
+                //Use elementsRangeSelector method around here.
+                List<char[]> elements = elementsRangeSelector(characterArray, item1);
+
+                //Around here I need to make and use a digit scrambler method on the results in elements to put in the loop.
+
+                foreach (var item in elements)
+                {
+                    if (EvenSymmetryCheck(item))//Give this a different portion of the array starting from longest going to smallest.
                     {
-                        if (EvenSymmetryCheck(item))//Give this a different portion of the array starting from longest going to smallest.
-                        {
-                            numberOfWays++;
-                        }
+                        numberOfWays++;
                     }
                 }
             }
+
+            foreach (var item1 in odds)
+            {
+                //Use elementsRangeSelector method around here.
+                List<char[]> elements = elementsRangeSelector(characterArray, item1);
+
+                //Around here I need to make and use a digit scrambler method on the results in elements to put in the loop.
+
+                foreach (var item in elements)
+                {
+                    if (EvenSymmetryCheck(item))//Give this a different portion of the array starting from longest going to smallest.
+                    {
+                        numberOfWays++;
+                    }
+                }
+            }
+            //}
 
             //If odd number of elements:*************************do odd things
             if (effectiveLength % 2 == 1)
