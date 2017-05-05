@@ -27,7 +27,7 @@ namespace ClassLibrary1
         {
             List<char[]> resultsList = new List<char[]>();
             if (range == 1)
-            {
+            {//hello? :D
                 return resultsList;
             }
 
