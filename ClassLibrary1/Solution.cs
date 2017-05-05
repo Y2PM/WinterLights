@@ -18,6 +18,11 @@ namespace ClassLibrary1
         private static List<char[]> ScrambleNumberIsItSymmetricMethod(List<char[]> elements)//Scramble the elements and return results.
         {
             List<char[]> scrambled = new List<char[]>();
+
+            foreach (var item in elements)
+            {
+
+            }
             //Scramble here, add to list, return.
 
             return scrambled;
@@ -44,7 +49,7 @@ namespace ClassLibrary1
 
         //Even check symmetry method:
         private static bool EvenSymmetryCheck(char[] characterArray)
-        {//made good for odds
+        {//made good for odds... done.
             int Length = characterArray.Length;
             int EndIndex = Length - 1;
 
@@ -163,6 +168,7 @@ namespace ClassLibrary1
                 List<char[]> elements = elementsRangeSelector(characterArray, item1);
 
                 //Around here I need to make and use a digit scrambler method on the results in elements to put in the loop.
+                //Actually no, I need to use an extra method to test if it can be arranged into something symmetric without actually doing it because there would be too many results otherwise.
 
                 foreach (var item in elements)
                 {
