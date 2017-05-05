@@ -83,7 +83,7 @@ namespace ClassLibrary1
                 }
             }
 
-            return true;//ckjuhgcukerhyg
+            return true;//ckjuhgcukerhygcwec
         }
 
         public int solutionMethod(string S)//Symmetry finding method.
