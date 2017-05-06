@@ -11,7 +11,7 @@ namespace WinterLights.Project
     {
         static void Main(string[] args)
         {
-            string S = "5414543541541534215878896454621321";
+            string S = "02002";
             int answer;
             Solution solutionObject = new Solution(200000);//should be 200000
 

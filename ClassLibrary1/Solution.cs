@@ -51,15 +51,46 @@ namespace ClassLibrary1
         private static bool EvenSymmetryCheck(char[] characterArray)
         {//made good for odds... done.
             int Length = characterArray.Length;
-            int EndIndex = Length - 1;
+            //int EndIndex = Length - 1;
+            Boolean SymmetricBoolean = true;
 
+            int[] howManyOfEach = new int[10];
+            foreach (var item in characterArray)
+            {
+                int compareChar = Convert.ToInt32(item.ToString());
+                for (int i = 0; i < 9; i++)
+                {
+                    if (compareChar == i)
+                    {
+                        howManyOfEach[i]++;
+                    }
+                }
+            }
+            //Here see if it can be symmetric when rearranged (which makes some other code not required, because if it can be rearranged then there's no need to check its current order):
+            //If in the case of an odd length array if more than 1 number appears an odd number of times then false, and if in the case of an even length array if any numbers appears a number of odd times then false.
+            int howManyTimesOdd = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                if (howManyOfEach[i] % 2 == 1)
+                {
+                    howManyTimesOdd++;
+                }
+            }
+            if ((howManyTimesOdd > 1 && Length % 2 == 1) || (howManyTimesOdd > 0 && Length % 2 == 0))
+            {
+                SymmetricBoolean = false;
+            }
+            //
 
+            /*
             if (characterArray.Length % 2 != 0)//if odd number of elements.
             {
                 decimal two = 2;
                 decimal middleIndex = Math.Floor(Length / two);
                 int middleIndexInt = Decimal.ToInt32(middleIndex);
                 char[] characterArrayToCheckOddSymmetry = new char[EndIndex];
+
+                
 
                 Array.Copy(characterArray, 0, characterArrayToCheckOddSymmetry, 0, middleIndexInt);//Pull out middle number and make new even array.
                 Array.Copy(characterArray, middleIndexInt + 1, characterArrayToCheckOddSymmetry, middleIndexInt, middleIndexInt);
@@ -69,7 +100,7 @@ namespace ClassLibrary1
                 {
                     if (characterArrayToCheckOddSymmetry[i] != characterArrayToCheckOddSymmetry[EndIndex - 1])
                     {
-                        return false;
+                        SymmetricBoolean = false;
                     }
                     EndIndex--;
                 }
@@ -82,13 +113,21 @@ namespace ClassLibrary1
                 {
                     if (characterArray[i] != characterArray[EndIndex])
                     {
-                        return false;
+                        SymmetricBoolean = false;
                     }
                     EndIndex--;
                 }
             }
+            */
 
-            return true;
+            if (SymmetricBoolean)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public int solutionMethod(string S)//Symmetry finding method.
