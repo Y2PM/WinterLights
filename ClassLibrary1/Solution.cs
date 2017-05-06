@@ -15,19 +15,6 @@ namespace ClassLibrary1
             Length = length;
         }
 
-        private static List<char[]> ScrambleNumberIsItSymmetricMethod(List<char[]> elements)//Scramble the elements and return results.
-        {
-            List<char[]> scrambled = new List<char[]>();
-
-            foreach (var item in elements)
-            {
-
-            }
-            //Scramble here, add to list, return.
-
-            return scrambled;
-        }
-
         private static List<char[]> elementsRangeSelector(char[] inputArray, int range)//This method should take a number representing a number of elements and an array, then return indexes for all elements that span the given range.
         {
             List<char[]> resultsList = new List<char[]>();
