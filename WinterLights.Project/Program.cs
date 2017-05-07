@@ -1,9 +1,5 @@
 ﻿using ClassLibrary1;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WinterLights.Project
 {
@@ -11,13 +7,20 @@ namespace WinterLights.Project
     {
         static void Main(string[] args)
         {
-            string S = "02002";
-            int answer;
-            Solution solutionObject = new Solution(200000);//should be 200000
+            String continueQuestion = "Y";
+            while (continueQuestion.ToUpper() == "Y" || continueQuestion.ToUpper() == "YES")
+            {
+                Console.Write("S = ");
+                string S = Console.ReadLine();
+                int answer;
+                Solution solutionObject = new Solution(200000);//should be 200000
 
-            answer = solutionObject.solutionMethod(S);
-            Console.WriteLine(answer);
-            Console.ReadLine();
+                answer = solutionObject.solutionMethod(S);
+                Console.WriteLine(answer);
+                Console.WriteLine("Continue? Yes or No ");
+                continueQuestion = Console.ReadLine();
+            }
+
 
             /*
             //Testing reverse method:
