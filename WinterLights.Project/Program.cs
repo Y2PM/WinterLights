@@ -1,5 +1,6 @@
 ﻿using ClassLibrary1;
 using System;
+using System.Numerics;
 
 namespace WinterLights.Project
 {
@@ -7,18 +8,30 @@ namespace WinterLights.Project
     {
         static void Main(string[] args)
         {
+
             String continueQuestion = "Y";
             while (continueQuestion.ToUpper() == "Y" || continueQuestion.ToUpper() == "YES")
             {
+
                 Console.Write("S = ");
                 string S = Console.ReadLine();
-                int answer;
-                Solution solutionObject = new Solution(200000);//should be 200000
+                BigInteger S1 = new BigInteger();
+                if (BigInteger.TryParse(S, out S1))
+                {
 
-                answer = solutionObject.solutionMethod(S);
-                Console.WriteLine(answer);
-                Console.WriteLine("Continue? Yes or No ");
-                continueQuestion = Console.ReadLine();
+                    int answer;
+                    Solution solutionObject = new Solution(200000);//should be 200000
+
+                    answer = solutionObject.solutionMethod(S);
+                    Console.WriteLine(answer);
+                    Console.WriteLine("Continue? Yes or No ");
+                    continueQuestion = Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine("Input a number");
+                }
+
             }
 
 
